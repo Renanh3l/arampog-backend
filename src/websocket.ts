@@ -28,6 +28,8 @@ async function checkQueue() {
 
     const redTeam = teams.slice(0, 5);
     const blueTeam = teams.slice(5, 10);
+    
+    // Matchfound: TODO: Wait users to accept queue
 
     // Remove users from queue
     matchMembers.forEach(async (member) => {
@@ -49,7 +51,7 @@ async function checkQueue() {
   }
 }
 
-setInterval(checkQueue, 2000);
+setInterval(checkQueue, 4000);
 
 io.on("connection", (socket) => {
   console.log("Connected: " + socket.data.userId);

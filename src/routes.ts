@@ -9,10 +9,12 @@ import EnterQueueUseCase from "./app/useCases/EnterQueue/EnterQueueUseCase";
 
 const router = Router();
 
-router.post("/users", UserController.store);
 router.get("/users", authMiddleware, UserController.index);
+router.post("/users", UserController.store);
+
 router.post("/auth", AuthController.authenticate);
 
+router.get("/queue", authMiddleware, UserController.listQueue);
 router.post("/queue", authMiddleware, EnterQueueUseCase.execute);
 
 export default router;

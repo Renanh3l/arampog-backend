@@ -1,10 +1,25 @@
-import { Request, Response } from "express";
+import { request, Request, Response } from "express";
 import { getRepository } from "typeorm";
 import User from "../models/User";
+
+interface ResponseUser {
+  password?: string;
+}
 
 class UserController {
   index(req: Request, res: Response) {
     return res.send({ userId: req.userId });
+  }
+
+  async listQueue(re: Request, res: Response) {
+    const repository = getRepository(User);
+
+    const users = await repository.find({ where: { inQueue: true } });
+
+    const responseUsers: ResponseUser[] = users;
+    responseUsers.forEach((user) => delete user.password);
+
+    return res.json(responseUsers);
   }
 
   async store(req: Request, res: Response) {

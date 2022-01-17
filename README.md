@@ -12,11 +12,15 @@
 ```
 ```
     Crie um arquivo de variáveis de ambiente .env
-    
-    Nele, configure a variável JWT_SECRET_KEY com uma 
+```
+```
+    Configure a variável JWT_SECRET_KEY com uma 
     string secreta para a utilização do JWT.
 ```
-
+```
+    Configure a variável BOT_TOKEN com o token
+    do bot para o Discord.
+```
 
 ## 💾 Instalando dependências
 

@@ -30,5 +30,9 @@ Rode o comando: yarn
 
 ## ⚙️ Iniciando
 ```
+  Para a primeira inicialização, rode as migrations utilizando:
+  yarn typeorm migration:run
+```
+```
 Para iniciar o servidor em desenvolvimento rode o comando: yarn dev
 ```

@@ -1,10 +1,6 @@
-import { request, Request, Response } from "express";
+import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import User from "../models/User";
-
-interface ResponseUser {
-  password?: string;
-}
 
 class UserController {
   index(req: Request, res: Response) {
@@ -16,28 +12,25 @@ class UserController {
 
     const users = await repository.find({ where: { inQueue: true } });
 
-    const responseUsers: ResponseUser[] = users;
-    responseUsers.forEach((user) => delete user.password);
-
-    return res.json(responseUsers);
+    return res.json(users);
   }
 
   async store(req: Request, res: Response) {
     const repository = getRepository(User);
 
-    const { email, password } = req.body;
+    const { id, username } = req.body;
 
-    const userExists = await repository.findOne({ where: { email } });
+    const userExists = await repository.findOne({ where: { id } });
 
     if (userExists) {
       return res.status(409).json({ message: "User already exists" });
     }
 
-    if (!email || !password) {
+    if (!id || !username) {
       return res.status(400).json({ message: "Unable to create user" });
     }
 
-    const user = repository.create({ email, password });
+    const user = repository.create({ id, nickname: username });
     await repository.save(user);
 
     return res.json(user);

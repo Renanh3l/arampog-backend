@@ -1,10 +1,7 @@
 import { io } from "./http";
-import authMiddlewareIO from "./app/middlewares/io/authMiddlewareIO";
 import User from "./app/models/User";
 import { getRepository } from "typeorm";
 import { shuffleArray } from "./utils";
-
-io.use(authMiddlewareIO);
 
 interface Match {
   select: boolean;

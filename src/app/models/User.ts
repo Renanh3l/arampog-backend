@@ -1,23 +1,13 @@
 import {
   Column,
   Entity,
-  PrimaryGeneratedColumn,
-  BeforeInsert,
-  BeforeUpdate,
+  PrimaryColumn,
 } from "typeorm";
-
-import bcrypt from "bcryptjs";
 
 @Entity("users")
 class User {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryColumn()
   id: string;
-
-  @Column()
-  email: string;
-
-  @Column()
-  password: string;
 
   @Column()
   nickname: string;
@@ -29,12 +19,6 @@ class User {
   inQueue: boolean;
 
   // TODO: inMatch?
-
-  @BeforeInsert()
-  @BeforeUpdate()
-  hashPassword() {
-    this.password = bcrypt.hashSync(this.password, 8);
-  }
 }
 
 export default User;
